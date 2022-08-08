@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import UnauthorizedAccess from "../../Special Pages/UnauthorizedAccess";
 import { User } from "../../../Interfaces+Classes";
-import { AddAdminsModal, ManageAdminsView } from "./ManageAdminsView";
+import { ManageAdminsView } from "./ManageAdminsView";
 
 interface AdminSettingsProps {
     users: User[];

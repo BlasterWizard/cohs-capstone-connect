@@ -112,12 +112,12 @@ export const AddAdminsModal: React.FC<AddAdminsModalProps> = ({ showModal, hideM
                         </button>
                     </div> 
                 )) :
-                <p>No Users Found</p>
+                    confirmAdmins.length < 0 &&  <p>No Users Found</p>
             }
         </Modal.Body>
         <Modal.Footer>
             {
-                adminsToAdd.length > 0  &&
+                confirmAdmins.length > 0  &&
                 <div className="flex flex-col w-full">
                     <p className="font-bold">Confirm New Admins:</p>
                     <div className="grid grid-flow-row grid-cols-4 space-x-5 mb-3">
