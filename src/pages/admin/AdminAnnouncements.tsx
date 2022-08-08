@@ -52,7 +52,9 @@ const AnnouncementsListView: React.FC<AdminAnnouncementsProps> = ({ announcement
                
             }, 
             new Date(),
-            newAnnouncementRef.id
+            newAnnouncementRef.id,
+            0,
+            []
         )).then(() => {
             toast.success("Announcement Posted!")
         }).catch((error) => {   

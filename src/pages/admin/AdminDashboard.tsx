@@ -49,6 +49,7 @@ export const AdminDashboardView: React.FC<AdminDashboardProps> = ({ users }) => 
     const findPendingUsers = () => {
         let pendingUsers: User[] = [];
         users.forEach((user: User) => {
+            console.log(user.approvalStatus.isApproved);
             if (!user.approvalStatus.isApproved) {
                 pendingUsers.push(user);
             }
@@ -172,7 +173,7 @@ const HorizontalPendingUserView: React.FC<HorizontalPendingUserViewProps> = ({ u
 
     async function acceptPendingRequest() {
         await updateDoc(doc(db, "users", user.studentDocID), {
-            isApproved: true
+            "approvalStatus.isApproved": true
         });
     }
 

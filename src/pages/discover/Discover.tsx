@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { User, CohortGroup, ProfileUser, Announcement, ProfileAttributeType } from "../Interfaces+Classes";
-import ProfilePicture, { ProfilePictureSize } from "../components/ProfilePicture";
-import { determineCohortGroups } from "../HelperFunctions";
-import { Button, Modal, Spinner } from "react-bootstrap";
-import UnauthorizedAccess from "./Special Pages/UnauthorizedAccess";
-import DiscoverPagination, { DiscoverPaginationKeys } from "../components/DiscoverPagination";
+import { User, CohortGroup, ProfileUser} from "../../Interfaces+Classes";
+import ProfilePicture, { ProfilePictureSize } from "../../components/ProfilePicture";
+import { determineCohortGroups } from "../../HelperFunctions";
+import { Modal } from "react-bootstrap";
+import UnauthorizedAccess from "../Special Pages/UnauthorizedAccess";
+import DiscoverPagination from "../../components/DiscoverPagination";
 import { Outlet, useLocation } from "react-router-dom";
+
 
 
 const Discover = () => {
@@ -19,8 +20,6 @@ const Discover = () => {
               ? 
 				<>
 					<DiscoverPagination pageLocation={location.pathname.substring(10)}/>
-					        {/* <AnnouncementsListView announcements={announcements} />
-                <CohortGroupsView cohortGroups={cohortGroups}/>  */}
 					<Outlet />
 				</>
               :
@@ -316,50 +315,6 @@ const DiscoverUserProfileModalView: React.FC<DiscoverUserProfileModalViewProps> 
 		</div>
       </Modal.Body>
     </Modal>
-  );
-}
-
-interface AnnouncementsListViewProps {
-  announcements: Announcement[];
-}
-
-export const AnnouncementsListView: React.FC<AnnouncementsListViewProps> = ({ announcements }) => {
-  return (
-    <div className="mt-5 w-full">
-      {
-        announcements.length > 0 &&
-        <>
-          <div className="flex flex-col w-full items-center space-y-2">
-            {
-              announcements.map((announcement: Announcement, index: number) => {
-                return <AnnouncementView announcement={announcement} key={index} />;
-              })
-            }
-          </div>
-        </>
-      }
-    </div>
-  );
-}
-
-interface AnnouncementViewProps {
-  announcement: Announcement;
-}
-
-const AnnouncementView: React.FC<AnnouncementViewProps> = ({ announcement }) => {
-  return (
-    <div className="flex flex-col bg-white/60 rounded-lg p-3 w-3/4 max-w-lg">
-        <div className="flex items-center text-center mb-2">
-            <div className="flex items-center space-x-2 w-full">
-                <ProfilePicture user={new ProfileUser(announcement.author.firstName, announcement.author.lastName, announcement.author.profileURL)} size={ProfilePictureSize.Small}/>  
-                <p className="font-bold text-lg text-slate-600">{announcement.author.firstName} {announcement.author.lastName}</p> 
-                <div className="flex-grow"></div>
-                <p className="text-sm text-slate-500">{announcement.date.toLocaleDateString("en-US")}</p>
-            </div>
-        </div>
-        <p className="font-bold">{announcement.title}</p>
-        <p>{announcement.message}</p>
-    </div>
   );
 }
 

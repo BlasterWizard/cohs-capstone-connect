@@ -1,5 +1,4 @@
 import { QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
-import { validateLocaleAndSetLanguage } from "typescript";
 
 export interface SelectOption {
   value: string | number;
@@ -119,13 +118,17 @@ export class Announcement {
   author: ProfileUser;
   date: Date;
   id: string;
+  loves: number;
+  reactedUsers: string[];
 
-  constructor(title: string, message: string, author: ProfileUser, date: Date, id: string) {
+  constructor(title: string, message: string, author: ProfileUser, date: Date, id: string, loves: number, reactedUsers: string[]) {
     this.title = title;
     this.message = message;
     this.author = author;
     this.date = date;
     this.id = id;
+    this.loves = loves;
+    this.reactedUsers = reactedUsers;
   }
 }
 
@@ -136,7 +139,9 @@ export const announcementConverter = {
       message: announcement.message,
       author: announcement.author,
       date: announcement.date,
-      id: announcement.id
+      id: announcement.id,
+      loves: announcement.loves,
+      reactedUsers: announcement.reactedUsers
     }
   },
   fromFirestore: (snapshot: QueryDocumentSnapshot, options: SnapshotOptions) => {
@@ -146,7 +151,9 @@ export const announcementConverter = {
       data.message,
       data.author,
       data.date.toDate(),
-      data.id
+      data.id,
+      data.loves,
+      data.reactedUsers
     );
   }
 }

@@ -1,6 +1,5 @@
-import { AuthErrorCodes } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { User, ProfileUser } from "../Interfaces+Classes";
+import { ProfileUser } from "../Interfaces+Classes";
 
 interface ProfilePictureProps {
     user: ProfileUser;

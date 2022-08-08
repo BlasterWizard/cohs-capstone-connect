@@ -1,6 +1,6 @@
 import { getDoc, doc } from "firebase/firestore";
 import db from "./firebase";
-import { CohortGroup, SelectOption, User } from "./Interfaces+Classes";
+import { CohortGroup, SelectOption, User, userConverter } from "./Interfaces+Classes";
 
 export async function getAvailableGraduatingYears() {
     let options: SelectOption[] = [];
@@ -54,4 +54,13 @@ export async function getAvailableGraduatingYears() {
       }
     }
     return -1;
+  }
+
+  export async function returnUserObject(studentDocID: string): Promise<User | undefined> {
+    const ref = doc(db, "users", studentDocID).withConverter(userConverter);
+    const userDocSnap = await getDoc(ref);
+    if (userDocSnap.exists()) {
+      return userDocSnap.data();
+    }
+    return undefined;
   }

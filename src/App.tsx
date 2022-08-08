@@ -6,7 +6,7 @@ import { getAuth, signOut, onAuthStateChanged, UserCredential } from "firebase/a
 import toast, { Toaster } from "react-hot-toast";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
-import Discover, { AnnouncementsListView, CohortGroupsView } from "./pages/Discover";
+import Discover, { CohortGroupsView } from "./pages/discover/Discover";
 import Profile from "./pages/Profile";
 import { Announcement, announcementConverter, User, userConverter } from "./Interfaces+Classes";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
@@ -16,6 +16,7 @@ import PageNotFound from "./pages/Special Pages/PageNotFound";
 import AdminAnnouncements from "./pages/admin/AdminAnnouncements";
 import { AdminDashboard, AdminDashboardView } from "./pages/admin/AdminDashboard";
 import AdminSettings from "./pages/admin/admin_settings/AdminSettings";
+import { AnnouncementsListView } from "./pages/discover/AnnouncementsListView";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
   useEffect(() => {
     console.log("refresh");
     authUser();
-  }, [user]);
+  }, []);
 
   function authUser() {
     onAuthStateChanged(auth, (user) => {
@@ -155,7 +156,7 @@ function App() {
             <Route path="/admin/adminSettings" element={<AdminSettings users={users}/>}/>
         </Route>
         <Route path="/discover" element={<Discover/>}>
-              <Route path="/discover/announcements" element={<AnnouncementsListView announcements={announcements} />}></Route>
+              <Route path="/discover/announcements" element={<AnnouncementsListView announcements={announcements} currentUser={currentUser}/>}></Route>
               <Route path="/discover/explore" element={<CohortGroupsView users={users}/>}></Route>
         </Route>
         <Route path="/profile" element={<Profile user={user} currentUser={currentUser}/>} />
